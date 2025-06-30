@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/weather_home_screen.dart';
+import '../constants/app_colors.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -26,16 +27,16 @@ class _BottomNavigationBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Current Weather')),
+      // appBar: AppBar(title: const Text('Current Weather')),
       body: Center(child: _pages.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.cloudy_snowing), label: 'Weather'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmarks), label: 'Saved'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: AppColors.primary,
         onTap: _onItemTapped,
       ),
     );

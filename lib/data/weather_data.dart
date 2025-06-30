@@ -10,6 +10,7 @@ class WeatherData {
         description: 'Clear sky with bright sunshine',
         humidity: 65,
         windSpeed: 12.5,
+        savedStatus: false
       ),
       WeatherModel(
         cityName: 'Bandung',
@@ -18,6 +19,7 @@ class WeatherData {
         description: 'Partly cloudy with cool breeze',
         humidity: 78,
         windSpeed: 8.3,
+        savedStatus: false
       ),
       WeatherModel(
         cityName: 'Surabaya',
@@ -26,6 +28,7 @@ class WeatherData {
         description: 'Mix of sun and clouds',
         humidity: 72,
         windSpeed: 15.2,
+        savedStatus: false
       ),
       WeatherModel(
         cityName: 'Medan',
@@ -34,6 +37,7 @@ class WeatherData {
         description: 'Light rain with overcast sky',
         humidity: 85,
         windSpeed: 10.7,
+        savedStatus: false
       ),
       WeatherModel(
         cityName: 'Yogyakarta',
@@ -42,6 +46,7 @@ class WeatherData {
         description: 'Overcast with mild temperature',
         humidity: 70,
         windSpeed: 6.8,
+        savedStatus: false
       ),
       WeatherModel(
         cityName: 'Makassar',
@@ -50,6 +55,7 @@ class WeatherData {
         description: 'Hot and sunny weather',
         humidity: 60,
         windSpeed: 14.1,
+        savedStatus: false
       ),
     ];
   }
