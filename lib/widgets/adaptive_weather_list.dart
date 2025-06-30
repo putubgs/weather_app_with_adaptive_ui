@@ -5,18 +5,21 @@ import 'weather_card.dart';
 
 class AdaptiveWeatherList extends StatelessWidget {
   final List<WeatherModel> weatherList;
+  final ValueChanged<WeatherModel> onTap;
 
   const AdaptiveWeatherList({
     super.key,
     required this.weatherList,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isLargeScreen = constraints.maxWidth > AppConstants.mobileBreakpoint;
-        
+        final isLargeScreen =
+            constraints.maxWidth > AppConstants.mobileBreakpoint;
+
         if (isLargeScreen) {
           return _buildGridView(context);
         } else {
@@ -30,12 +33,14 @@ class AdaptiveWeatherList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(AppConstants.paddingMedium),
       itemCount: weatherList.length,
-      separatorBuilder: (context, index) => 
-        const SizedBox(height: AppConstants.paddingMedium),
+      separatorBuilder: (context, index) =>
+          const SizedBox(height: AppConstants.paddingMedium),
       itemBuilder: (context, index) {
-        return WeatherCard(
-          weather: weatherList[index],
-          isLargeScreen: false,
+        final w = weatherList[index];
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTap(w),
+          child: WeatherCard(weather: w, isLargeScreen: false),
         );
       },
     );
@@ -44,7 +49,6 @@ class AdaptiveWeatherList extends StatelessWidget {
   Widget _buildGridView(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     int crossAxisCount = 2;
-    
     if (screenWidth > AppConstants.tabletBreakpoint) {
       crossAxisCount = 3;
     }
@@ -59,9 +63,11 @@ class AdaptiveWeatherList extends StatelessWidget {
       ),
       itemCount: weatherList.length,
       itemBuilder: (context, index) {
-        return WeatherCard(
-          weather: weatherList[index],
-          isLargeScreen: true,
+        final w = weatherList[index];
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTap(w),
+          child: WeatherCard(weather: w, isLargeScreen: true),
         );
       },
     );

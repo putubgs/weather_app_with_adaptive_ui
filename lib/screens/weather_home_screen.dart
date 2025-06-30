@@ -4,6 +4,7 @@ import '../constants/app_constants.dart';
 import '../data/weather_data.dart';
 import '../models/weather_model.dart';
 import '../widgets/adaptive_weather_list.dart';
+import '../screens/current_weather.dart';
 
 class WeatherHomeScreen extends StatefulWidget {
   const WeatherHomeScreen({super.key});
@@ -22,28 +23,21 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     _loadWeatherData();
   }
 
-  void _loadWeatherData() async {
+  Future<void> _loadWeatherData() async {
     await Future.delayed(const Duration(milliseconds: 800));
-
     setState(() {
       weatherList = WeatherData.getDummyWeatherData();
       isLoading = false;
     });
   }
 
-  // void _navigateToDetail() {
-  //   Navigator.pushNamed(context, '/detail', arguments: "Hello from Home!");
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: isLoading ? _buildLoadingWidget() : _buildWeatherContent(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _navigateToDetail,
-      //   child: Icon(Icons.navigate_next),
-      // ),
+      body: isLoading
+          ? _buildLoadingWidget()
+          : _buildWeatherContent(context),
     );
   }
 
@@ -55,9 +49,8 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
       title: Text(
         'Weather Lists',
         style: TextStyle(
-          fontSize: isLargeScreen
-              ? AppConstants.fontXLarge
-              : AppConstants.fontLarge,
+          fontSize:
+              isLargeScreen ? AppConstants.fontXLarge : AppConstants.fontLarge,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -97,12 +90,22 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     );
   }
 
-  Widget _buildWeatherContent() {
+  Widget _buildWeatherContent(BuildContext context) {
     if (weatherList.isEmpty) {
       return _buildEmptyState();
     }
 
-    return AdaptiveWeatherList(weatherList: weatherList);
+    return AdaptiveWeatherList(
+      weatherList: weatherList,
+      onTap: (WeatherModel selectedWeather) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) =>
+                CurrentWeatherScreen(weather: selectedWeather),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildEmptyState() {

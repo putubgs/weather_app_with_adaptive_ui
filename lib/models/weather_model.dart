@@ -5,7 +5,6 @@ class WeatherModel {
   final String description;
   final int humidity;
   final double windSpeed;
-  final bool savedStatus;
 
   WeatherModel({
     required this.cityName,
@@ -14,7 +13,6 @@ class WeatherModel {
     required this.description,
     required this.humidity,
     required this.windSpeed,
-    required this.savedStatus
   });
 
   String get formattedTemperature => '${temperature.toInt()}°C';
