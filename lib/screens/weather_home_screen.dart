@@ -15,13 +15,6 @@ class WeatherHomeScreen extends StatefulWidget {
 class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   List<WeatherModel> weatherList = [];
   bool isLoading = true;
-  int _selectedIndex = 0;
-
-  static const List<Widget> _pages = [
-    Center(child: Text('Home')),
-    Center(child: Text('Search')),
-    Center(child: Text('Profile')),
-  ];
 
   @override
   void initState() {
@@ -38,35 +31,19 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  void _navigateToDetail() {
-    Navigator.pushNamed(context, '/detail', arguments: "Hello from Home!");
-  }
+  // void _navigateToDetail() {
+  //   Navigator.pushNamed(context, '/detail', arguments: "Hello from Home!");
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: isLoading ? _buildLoadingWidget() : _buildWeatherContent(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.deepPurple,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToDetail,
-        child: Icon(Icons.navigate_next),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _navigateToDetail,
+      //   child: Icon(Icons.navigate_next),
+      // ),
     );
   }
 
@@ -76,7 +53,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
 
     return AppBar(
       title: Text(
-        'Weather App',
+        'Weather Lists',
         style: TextStyle(
           fontSize: isLargeScreen
               ? AppConstants.fontXLarge
