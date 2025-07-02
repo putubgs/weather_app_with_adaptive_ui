@@ -4,6 +4,7 @@ import '../data/weather_data.dart';
 import '../models/weather_model.dart';
 import '../screens/weather_home_screen.dart';
 import '../screens/current_weather.dart';
+import '../screens/profile_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -36,7 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final pages = <Widget>[
       const WeatherHomeScreen(),
       CurrentWeatherScreen(weather: _defaultWeather),
-      const Center(child: Text('Index 2: Profile Page')),
+      const ProfilePage(),
     ];
 
     return Scaffold(
